@@ -1,94 +1,194 @@
+# Nx Plus Nuxt
 
+> First class support for [Nuxt](https://nuxtjs.org/) in your [Nx](https://nx.dev/) workspace.
 
-# CivitasLms
+<div align="center">
+  <img src="https://raw.githubusercontent.com/ZachJW34/nx-plus/master/libs/nuxt/nx-plus-nuxt.png">
+</div>
 
-This project was generated using [Nx](https://nx.dev).
+## Contents
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+- [Nx Plus Nuxt](#nx-plus-nuxt)
+  - [Contents](#contents)
+  - [Prerequisite](#prerequisite)
+    - [Nx Workspace](#nx-workspace)
+    - [Peer Dependencies](#peer-dependencies)
+  - [Getting Started](#getting-started)
+    - [Install Plugin](#install-plugin)
+    - [Generate Your App](#generate-your-app)
+    - [Serve Your App](#serve-your-app)
+  - [Schematics (i.e. code generation)](#schematics-ie-code-generation)
+    - [Application](#application)
+  - [Builders (i.e. task runners)](#builders-ie-task-runners)
+    - [Dev Server](#dev-server)
+    - [Browser](#browser)
+    - [Static](#static)
+    - [Configuring Nuxt.js](#configuring-nuxtjs)
+    - [Linting](#linting)
+    - [Unit Testing](#unit-testing)
+    - [E2E Testing](#e2e-testing)
+  - [Updating Nx Plus Nuxt](#updating-nx-plus-nuxt)
+    - [How to Migrate](#how-to-migrate)
+      - [Generate migrations.json](#generate-migrationsjson)
+      - [Run Migrations](#run-migrations)
 
-🔎 **Smart, Fast and Extensible Build System**
+## Prerequisite
 
-## Adding capabilities to your workspace
+### Nx Workspace
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+If you have not already, [create an Nx workspace](https://github.com/nrwl/nx#creating-an-nx-workspace) with the following:
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+```
+npx create-nx-workspace@^14.0.0
+```
 
-Below are our core plugins:
+### Peer Dependencies
 
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+If you have not already, install peer dependencies with the following:
 
-There are also many [community plugins](https://nx.dev/community) you could add.
+```
+# npm
+npm install @nrwl/cypress@^14.0.0 @nrwl/jest@^14.0.0 @nrwl/linter@^14.0.0 --save-dev
 
-## Generate an application
+# yarn
+yarn add @nrwl/cypress@^14.0.0 @nrwl/jest@^14.0.0 @nrwl/linter@^14.0.0 --dev
+```
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+## Getting Started
 
-> You can use any of the plugins above to generate applications as well.
+### Install Plugin
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+```
+# npm
+npm install @nx-plus/nuxt --save-dev
 
-## Generate a library
+# yarn
+yarn add @nx-plus/nuxt --dev
+```
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+### Generate Your App
 
-> You can also use any of the plugins above to generate libraries as well.
+```
+nx g @nx-plus/nuxt:app my-app
+```
 
-Libraries are shareable across libraries and applications. They can be imported from `@civitas-lms/mylib`.
+### Serve Your App
 
-## Development server
+```
+nx serve my-app
+```
 
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+## Schematics (i.e. code generation)
 
-## Code scaffolding
+### Application
 
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
+`nx g @nx-plus/nuxt:app <name> [options]`
 
-## Build
+| Arguments | Description           |
+| --------- | --------------------- |
+| `<name>`  | The name of your app. |
 
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+| Options            | Default   | Description                                    |
+| ------------------ | --------- | ---------------------------------------------- |
+| `--tags`           | -         | Tags to use for linting (comma-delimited).     |
+| `--directory`      | `apps`    | A directory where the project is placed.       |
+| `--unitTestRunner` | `jest`    | Test runner to use for unit tests.             |
+| `--e2eTestRunner`  | `cypress` | Test runner to use for end to end (e2e) tests. |
+| `--skipFormat`     | `false`   | Skip formatting files.                         |
 
-## Running unit tests
+## Builders (i.e. task runners)
 
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
+### Dev Server
 
-Run `nx affected:test` to execute the unit tests affected by a change.
+`nx serve <name> [options]`
 
-## Running end-to-end tests
+| Arguments | Description           |
+| --------- | --------------------- |
+| `<name>`  | The name of your app. |
 
-Run `nx e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
+| Options           | Default | Description                                           |
+| ----------------- | ------- | ----------------------------------------------------- |
+| `--browserTarget` | -       | Target to serve.                                      |
+| `--dev`           | `true`  | Define the development or production mode of Nuxt.js. |
 
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
+### Browser
 
-## Understand your workspace
+`nx build <name> [options]`
 
-Run `nx graph` to see a diagram of the dependencies of your projects.
+| Arguments | Description           |
+| --------- | --------------------- |
+| `<name>`  | The name of your app. |
 
-## Further help
+| Options      | Default | Description                                             |
+| ------------ | ------- | ------------------------------------------------------- |
+| `--buildDir` | -       | Define the dist directory for your Nuxt.js application. |
 
-Visit the [Nx Documentation](https://nx.dev) to learn more.
+### Static
 
+`nx static <name> [options]`
 
+| Arguments | Description           |
+| --------- | --------------------- |
+| `<name>`  | The name of your app. |
 
-## ☁ Nx Cloud
+| Options           | Default | Description         |
+| ----------------- | ------- | ------------------- |
+| `--browserTarget` | -       | Target to generate. |
 
-### Distributed Computation Caching & Distributed Task Execution
+### Configuring Nuxt.js
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
+By default, Nuxt.js is configured to cover most use cases. This default configuration can be overwritten with the `nuxt.config.js` file. For more information see the [NuxtJS documentation](https://nuxtjs.org/guides/directory-structure/nuxt-config#nuxtconfigjs).
 
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
+### Linting
 
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
+`nx lint <name> [options]`
 
-Visit [Nx Cloud](https://nx.app/) to learn more.
+We use `@nrwl/linter` for linting, so the options are as documented [here](https://github.com/nrwl/nx/blob/master/docs/angular/api-linter/builders/eslint.md#eslint).
+
+### Unit Testing
+
+`nx test <name> [options]`
+
+We use `@nrwl/jest` for unit testing, so the options are as documented [here](https://github.com/nrwl/nx/blob/master/docs/angular/api-jest/builders/jest.md#jest).
+
+### E2E Testing
+
+`nx e2e <name> [options]`
+
+We use `@nrwl/cypress` for e2e testing, so the options are as documented [here](https://github.com/nrwl/nx/blob/master/docs/angular/api-cypress/builders/cypress.md#cypress).
+
+## Updating Nx Plus Nuxt
+
+Nx Plus Nuxt provides migrations which help you stay up to date with the latest version of Nx Plus Nuxt.
+
+Not only do we migrate the version of Nx Plus Nuxt, but we also update the versions of dependencies which we install such as `nuxt` and `@nuxt/types`.
+
+We recommend waiting for Nx Plus Nuxt to update these dependencies for you as we verify that these versions work together.
+
+### How to Migrate
+
+#### Generate migrations.json
+
+All you have to do to update Nx Plus Nuxt to the latest version is run the following:
+
+```
+nx migrate @nx-plus/nuxt
+nx migrate @nx-plus/nuxt@version # you can also specify version
+```
+
+This will fetch the specified version of `@nx-plus/nuxt`, analyze the dependencies and fetch all the dependent packages. The process will keep going until the whole tree of dependencies is resolved. This will result in:
+
+- `package.json` being updated
+- `migrations.json` being generated
+
+At this point, no packages have been installed, and no other files have been touched.
+
+Now, you can inspect `package.json` to see if the changes make sense and install the packages by running `npm install` or `yarn`.
+
+#### Run Migrations
+
+`migrations.json` contains the transformations that must run to prepare the workspace to the newly installed versions of packages. To run all the migrations, invoke:
+
+```
+nx migrate --run-migrations=migrations.json
+```
