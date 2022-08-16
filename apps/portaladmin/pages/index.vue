@@ -1,9 +1,17 @@
 <template>
-  <NuxtTutorial />
+  <div>
+    <NuxtTutorial />
+    <HelloWorld />
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-
-export default Vue.extend({});
+import { HelloWorld } from '@civitas-lms/shared';
+export default Vue.extend({
+  name: 'HomeAdmin',
+  components: {
+    HelloWorld,
+  },
+});
 </script>
