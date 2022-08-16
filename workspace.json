@@ -2,6 +2,8 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
+    "portaladmin": "apps/portaladmin",
+    "portaladmin-e2e": "apps/portaladmin-e2e",
     "portaluser": "apps/portaluser",
     "portaluser-e2e": "apps/portaluser-e2e"
   }
