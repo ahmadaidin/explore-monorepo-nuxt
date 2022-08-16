@@ -5,6 +5,7 @@
     "portaladmin": "apps/portaladmin",
     "portaladmin-e2e": "apps/portaladmin-e2e",
     "portaluser": "apps/portaluser",
-    "portaluser-e2e": "apps/portaluser-e2e"
+    "portaluser-e2e": "apps/portaluser-e2e",
+    "shared": "libs/shared"
   }
 }
