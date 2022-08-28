@@ -1,7 +1,7 @@
 <template>
   <div>
-    <NuxtTutorial />
     <HelloWorld />
+    <NuxtTutorial />
   </div>
 </template>
 
